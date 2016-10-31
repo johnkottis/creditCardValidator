@@ -1,11 +1,12 @@
 # creditCardValidator
 
-In order to be able to preview the solution you need to install Node.js in your workstation.
+Credit card validator
+  1. User can check if a credit card is valid
+  2. User can find credit card's type
+  
+Technologies
+  1. ECMA6 (solution works on modern browsers)
 
-After this please open a console in the Gruntfile’s directory and run the following commands:
-1.	npm install
-2.	npm install grunt
-3.	npm install grunt-cli
-4.	grunt deploy
-
-Please include a brief description of your solution and what decisions you made in its creation.
+Todo:
+  1. Unit Tests
+  2. Convert to ECMA5
