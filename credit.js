@@ -1,75 +1,66 @@
 /**
-*   CreditCard validting functions
-*   Date: 06/03/2016
+*   Credit Card Validator
+*   Date: 31/10/2016
 *   Dev: John Kottis
 */
 
 var CreditCard = CreditCard || {};
 
 CreditCard.Validators = (function () {
-
-
-
     /**
-    * Check if input changed
-    * 
-    * @cardNumber {String} credit cards number, accept only digits, dashes or spaces
-    **/
-    function isValid(cardNumber) {
+     *   Credit card validator
+     *
+     *   @param  {String} cardNumber             - credit cards number, accept only digits, dashes or spaces
+     *
+     */
+    let isValidCard = (cardNumber) => {
         if (/[^0-9-\s]+/.test(cardNumber)) {
             return false;
         }
-        var nCheck = 0, 
+        let nCheck = 0, 
             nDigit = 0, 
             bEven = false;
             cardNumber = cardNumber.replace(/\D/g, '');
 
-        for (var n = cardNumber.length - 1; n >= 0; n--) {
-            var cDigit = cardNumber.charAt(n);
+        for (let n = cardNumber.length - 1; n >= 0; n--) {
+            let cDigit = cardNumber.charAt(n);
                 nDigit = parseInt(cDigit, 10);
 
             if (bEven) {
                 if ((nDigit *= 2) > 9) nDigit -= 9;
             }
-
             nCheck += nDigit;
             bEven = !bEven;
         }
 
         return (nCheck % 10) === 0;
-    }
-
+    },
 
     /**
-    * Checks card type
-    * 
-    * @cardNumber {String} credit cards number, accept only digits, dashes or spaces
-    **/
-    function cardType(cardNumber) {            
-        var regularExpres = new RegExp('^4');
-        if (cardNumber.match(regularExpres) !== null) {
+     *   Finds credit card's type
+     *
+     *   @param  {String} cardNumber             - credit cards number, accept only digits, dashes or spaces
+     *
+     */
+    cardType = (cardNumber) => {
+        let regExs = ['^4', '^(34|37)', '^5[1-5]', '^6011'];
+
+        if (cardNumber.match(regExs[0]) !== null) {
             return 'Visa';
-        }
-
-        regularExpres = new RegExp('^(34|37)');
-        if (cardNumber.match(regularExpres) !== null) {
+        } else if (cardNumber.match(regExs[1]) !== null) {
             return 'American Express';
-        }
-
-        regularExpres = new RegExp('^5[1-5]');
-        if (cardNumber.match(regularExpres) !== null)
+        } else if (cardNumber.match(regExs[2]) !== null) {
             return 'MasterCard';
-
-        regularExpres = new RegExp('^6011');
-        if (cardNumber.match(regularExpres) !== null)
+        } else if (cardNumber.match(regExs[3]) !== null) {
             return 'Discover';
-
-        return '';
-    }
+        } else {
+            return 'unknown credit card'
+        }
+    };
 
 
     return {
-        isValid: isValid,
+        isValidCard: isValidCard,
         cardType: cardType
     };
 
