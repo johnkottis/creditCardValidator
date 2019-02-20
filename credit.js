@@ -1,7 +1,5 @@
 /**
 *   Credit Card Validator
-*   Date: 31/10/2016
-*   Dev: John Kottis
 */
 
 var CreditCard = CreditCard || {};
@@ -13,18 +11,18 @@ CreditCard.Validators = (function () {
      *   @param  {String} cardNumber             - credit cards number, accept only digits, dashes or spaces
      *
      */
-    let isValidCard = (cardNumber) => {
+     let isValidCard = (cardNumber) => {
         if (/[^0-9-\s]+/.test(cardNumber)) {
             return false;
         }
         let nCheck = 0, 
-            nDigit = 0, 
-            bEven = false;
-            cardNumber = cardNumber.replace(/\D/g, '');
+        nDigit = 0, 
+        bEven = false;
+        cardNumber = cardNumber.replace(/\D/g, '');
 
         for (let n = cardNumber.length - 1; n >= 0; n--) {
             let cDigit = cardNumber.charAt(n);
-                nDigit = parseInt(cDigit, 10);
+            nDigit = parseInt(cDigit, 10);
 
             if (bEven) {
                 if ((nDigit *= 2) > 9) nDigit -= 9;
@@ -42,7 +40,7 @@ CreditCard.Validators = (function () {
      *   @param  {String} cardNumber             - credit cards number, accept only digits, dashes or spaces
      *
      */
-    cardType = (cardNumber) => {
+     cardType = (cardNumber) => {
         let regExs = ['^4', '^(34|37)', '^5[1-5]', '^6011'];
 
         if (cardNumber.match(regExs[0]) !== null) {
@@ -54,10 +52,9 @@ CreditCard.Validators = (function () {
         } else if (cardNumber.match(regExs[3]) !== null) {
             return 'Discover';
         } else {
-            return 'unknown credit card'
+            return 'unknown credit card';
         }
     };
-
 
     return {
         isValidCard: isValidCard,
